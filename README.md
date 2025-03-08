@@ -20,7 +20,7 @@ The dataset consists of **user reviews, ratings, and restaurant details**. You c
 - **Scikit-Learn** (for ML models)
 - **Pandas & NumPy** (for data handling)
 - **Matplotlib & Seaborn** (for data visualization)
-- **Flask/Streamlit** (for deployment - optional)
+- **Flask** (for deployment)
 
 ## ⚙️ Installation & Setup
 1. **Clone the Repository**
