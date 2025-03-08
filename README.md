@@ -8,7 +8,6 @@ This project focuses on **Natural Language Processing (NLP) and Sentiment Analys
 - **Sentiment Analysis** (Positive, Negative, Neutral classification)
 - **Machine Learning Models** for sentiment prediction
 - **Data Visualization** using Matplotlib & Seaborn
-- **Deployed using Streamlit (Optional)**
 
 ## 📂 Dataset
 The dataset consists of **user reviews, ratings, and restaurant details**. You can use:
