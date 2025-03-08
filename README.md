@@ -49,13 +49,7 @@ The dataset consists of **user reviews, ratings, and restaurant details**. You c
    ```sh
    python main.py
    ```
-
-## 📊 Example Visualizations
-Here are some insights you can generate:
-- **Sentiment Distribution Chart**
-- **Word Cloud of Most Common Words**
-- **Top Positive & Negative Reviews**
-
+   
 ## 🤖 Future Enhancements
 - Implement **Deep Learning (LSTMs, Transformers)** for improved sentiment detection
 - Build an **interactive dashboard** for review insights
