@@ -1,0 +1,137 @@
+<html>
+    <head>
+        <title>Zomato Review Analysis Dashboard</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+        <style>
+            body {
+                padding-top: 2rem;
+                padding-bottom: 2rem;
+                background-color: #f8f9fa;
+            }
+            .chart-container {
+                background-color: white;
+                border-radius: 10px;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                padding: 1rem;
+                margin-bottom: 2rem;
+            }
+            .stats-card {
+                border-radius: 10px;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                padding: 1.5rem;
+                background-color: white;
+                margin-bottom: 2rem;
+            }
+            .header {
+                margin-bottom: 2rem;
+                text-align: center;
+            }
+            .stat-item {
+                text-align: center;
+                padding: 1rem;
+            }
+            .stat-value {
+                font-size: 2rem;
+                font-weight: bold;
+            }
+            .positive { color: #28a745; }
+            .negative { color: #dc3545; }
+            .neutral { color: #6c757d; }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="header">
+                <h1>Zomato Review Analysis Results</h1>
+                <a href="/" class="btn btn-outline-secondary mt-2">Back to Upload</a>
+            </div>
+            
+            <div class="stats-card">
+                <h4 class="mb-4">Summary Statistics</h4>
+                <div class="row">
+                    <div class="col-md-3 stat-item">
+                        <div class="stat-value">{{ total_reviews }}</div>
+                        <div>Total Reviews</div>
+                    </div>
+                    <div class="col-md-3 stat-item">
+                        <div class="stat-value positive">{{ positive_reviews }}</div>
+                        <div>Positive ({{ "%.1f"|format(positive_reviews/total_reviews*100) }}%)</div>
+                    </div>
+                    <div class="col-md-3 stat-item">
+                        <div class="stat-value negative">{{ negative_reviews }}</div>
+                        <div>Negative ({{ "%.1f"|format(negative_reviews/total_reviews*100) }}%)</div>
+                    </div>
+                    <div class="col-md-3 stat-item">
+                        <div class="stat-value neutral">{{ neutral_reviews }}</div>
+                        <div>Neutral ({{ "%.1f"|format(neutral_reviews/total_reviews*100) }}%)</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="chart-container">
+                        <h5>Sentiment Distribution</h5>
+                        <img src="data:image/png;base64,{{ charts.sentiment_pie }}" class="img-fluid">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="chart-container">
+                        <h5>Rating Distribution</h5>
+                        <img src="data:image/png;base64,{{ charts.rating_dist }}" class="img-fluid">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="chart-container">
+                <h5>Rating vs Sentiment Correlation</h5>
+                <img src="data:image/png;base64,{{ charts.correlation }}" class="img-fluid">
+            </div>
+            
+            {% if charts.positive_wordcloud %}
+            <div class="chart-container">
+                <h5>Most Common Words in Positive Reviews</h5>
+                <img src="data:image/png;base64,{{ charts.positive_wordcloud }}" class="img-fluid">
+            </div>
+            {% endif %}
+            
+            {% if charts.negative_wordcloud %}
+            <div class="chart-container">
+                <h5>Most Common Words in Negative Reviews</h5>
+                <img src="data:image/png;base64,{{ charts.negative_wordcloud }}" class="img-fluid">
+            </div>
+            {% endif %}
+            
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="chart-container">
+                        <h5>Sample Positive Reviews</h5>
+                        <ul class="list-group">
+                            {% for review in positive_sample %}
+                            <li class="list-group-item">
+                                <strong>Rating: {{ review.rating }}</strong>
+                                <p>{{ review.review }}</p>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="chart-container">
+                        <h5>Sample Negative Reviews</h5>
+                        <ul class="list-group">
+                            {% for review in negative_sample %}
+                            <li class="list-group-item">
+                                <strong>Rating: {{ review.rating }}</strong>
+                                <p>{{ review.review }}</p>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    </body>
+    </html>
