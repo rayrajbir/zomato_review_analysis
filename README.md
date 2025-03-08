@@ -47,7 +47,7 @@ The dataset consists of **user reviews, ratings, and restaurant details**. You c
    ```
 5. **Run the Analysis**
    ```sh
-   python main.py
+   python app.py
    ```
    
 ## 🤖 Future Enhancements
